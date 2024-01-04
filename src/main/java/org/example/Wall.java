@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Wall implements Structure {
-    private final List<Block> blocks;
+    private final CompositeBlock blocks;
 
-    public Wall(List<Block> blocks) {
+    public Wall(CompositeBlock blocks) {
         this.blocks = blocks;
     }
 
@@ -18,7 +18,7 @@ public class Wall implements Structure {
             return Optional.empty();
         }
 
-        return blocks.stream()
+        return blocks.getBlocks().stream()
                 .filter(block -> block.getColor().equals(color))
                 .findAny();
     }
@@ -29,7 +29,7 @@ public class Wall implements Structure {
             return Collections.emptyList();
         }
 
-        return blocks.stream()
+        return blocks.getBlocks().stream()
                 .filter(block -> block.getMaterial().equals(material))
                 .collect(Collectors.toList());
     }
@@ -39,10 +39,10 @@ public class Wall implements Structure {
         if(blocksNullOrEmpty()) {
             return 0;
         }
-        return blocks.size();
+        return blocks.getBlocks().size();
     }
 
     private boolean blocksNullOrEmpty() {
-        return blocks == null || blocks.isEmpty();
+        return blocks == null || blocks.getBlocks()==null || blocks.getBlocks().isEmpty();
     }
 }
