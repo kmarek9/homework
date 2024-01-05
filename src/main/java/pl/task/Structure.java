@@ -1,4 +1,4 @@
-package org.example;
+package pl.task;
 
 import java.util.List;
 import java.util.Optional;
